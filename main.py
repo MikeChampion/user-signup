@@ -5,16 +5,24 @@ app = Flask(__name__)
 
 app.config['DEBUG'] = True      # displays runtime errors in the browser, too
 
-@app.route("/add", methods=['GET', 'POST'])
-def validate():
-    #user_name = request.form['username']
+@app.route("/login", methods=['GET', 'POST'])
+def validation():
+    username = request.form['user-name']
     #password = request.form['password']
     #password2 = request.form['password2']
     #email = request.form['email']
-    return render_template('welcome.html', username='user_name')
+    
+    error = None
+    if len(username) < 3:
+        error = "Username must be between 3 and 20 characters"
+        return render_template("/layout.html")
+    else:   
+        pass     
+    return render_template('welcome.html', username=username)
 
 @app.route("/")
 def index():
-    return render_template('layout.html')
+    encoded_error = request.args.get("error")
+    return render_template('layout.html', error=encoded_error and cgi.escape(encoded_error, quote=True))
 
 app.run()
