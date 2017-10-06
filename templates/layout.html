@@ -3,27 +3,27 @@
 {% block content %}
 
     <div class="container">
-    <form action="/login" method="post">
+    <form action="/validate" method="post">
         <div>
             <label for="username">Username:<font color='red'>*</font></label>
-            <input id="username" name='user-name' type="text" required emsg='Username must be between 3 and 20 characters' title="Enter your username, 3 to 20 characters" value="{{ request.form['user-name'] }}"/>
+            <input id="username" name='user-name' type="text" title="Enter your username, 3 to 20 characters" value="{{ request.form['user-name'] }}"/>
         </div>
-        <span class="error"></span>
-        <p></p>
+        <p class="error">{{ username_error }}</p>
         <div>
             <label for="password">Password:<font color='red'>*</font></label>
-            <input id="password" type="password" name="password" required title="Password must be between 3 and 20 characters" />
+            <input id="password" type="password" name="password" title="Password must be between 3 and 20 characters" />
         </div>
-        <p></p>
+        <p class="error">{{ password_error }}</p>
         <div>
             <label for="password2">Verify Password:<font color='red'>*</font></label>
-            <input id="password2" type="password" name="password2" required title="Please retype your password"/>
+            <input id="password2" type="password" name="password2" title="Please retype your password"/>
         </div>
-        <p></p>
+        <p class="error">{{ password2_error }}</p>
         <div>
             <label for="email">(optional) Email:</label>
             <input id="email" name="email" type="text" value="{{ request.form['email'] }}" title="Enter your email"/>
         </div>
+        <p class="error">{{ email_error }}</p>
         <p><font color='red'>*</font> - Indicates required field</p>
         <div>
             <input type="submit" value="Submit"/>
